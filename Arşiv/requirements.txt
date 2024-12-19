@@ -1,0 +1,15 @@
+Flask==2.0.1
+Flask-SQLAlchemy==2.5.1
+Flask-Login==0.5.0
+Flask-Migrate==3.1.0
+requests==2.26.0
+matplotlib==3.4.3
+seaborn==0.11.2
+folium==0.12.1
+python-dotenv==0.19.0
+folium-plugins==0.13.0
+gunicorn==21.2.0
+plotly==5.18.0
+apscheduler==3.10.4
+pdfkit==1.0.0
+WeasyPrint==59.0 

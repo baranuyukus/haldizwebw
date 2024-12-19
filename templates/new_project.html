@@ -1,0 +1,303 @@
+{% extends "base.html" %}
+
+{% block title %}Yeni Proje - Maps Rank Tracker{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-100 py-6">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white shadow rounded-lg">
+            <!-- Üst Başlık Alanı -->
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h1 class="text-2xl font-bold text-gray-900">Yeni Proje Oluştur</h1>
+                <p class="mt-1 text-sm text-gray-500">
+                    İşletmenizin Google Maps sıralamasını takip etmek için yeni bir proje oluşturun.
+                </p>
+            </div>
+
+            <!-- Form Alanı -->
+            <form action="{{ url_for('new_project') }}" method="POST" class="p-6 space-y-8">
+                <!-- Google Maps Link Girişi -->
+                <div class="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                    <label class="block text-sm font-medium text-blue-800 mb-2">
+                        <div class="flex items-center">
+                            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            Google Maps İşletme Linki
+                        </div>
+                    </label>
+                    <div class="flex gap-2">
+                        <input type="text" id="maps_link" 
+                            class="flex-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                            placeholder="Google Maps'ten kopyaladığınız işletme linkini yapıştırın">
+                        <button type="button" onclick="extractBusinessInfo()"
+                            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            <svg class="h-4 w-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                            </svg>
+                            Bilgileri Çek
+                        </button>
+                    </div>
+                    <p class="mt-2 text-sm text-blue-600">
+                        İşletmenizin Google Maps sayfasını açın, linki kopyalayın ve buraya yapıştırın.
+                    </p>
+                </div>
+
+                <!-- Ana Form Alanları -->
+                <div class="grid grid-cols-1 gap-6">
+                    <!-- Proje Adı -->
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700">
+                            Proje Adı <span class="text-red-500">*</span>
+                        </label>
+                        <div class="mt-1">
+                            <input type="text" name="name" id="name" required
+                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                placeholder="Örn: İşletmemin Sıralama Takibi">
+                        </div>
+                        <p class="mt-1 text-sm text-gray-500">
+                            Projenizi kolayca tanımanızı sağlayacak bir isim girin.
+                        </p>
+                    </div>
+
+                    <!-- Hedef İşletme -->
+                    <div>
+                        <label for="target_business" class="block text-sm font-medium text-gray-700">
+                            Hedef İşletme <span class="text-red-500">*</span>
+                        </label>
+                        <div class="mt-1">
+                            <input type="text" name="target_business" id="target_business" required
+                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                placeholder="Örn: Akyarlar Windsurf">
+                        </div>
+                        <p class="mt-1 text-sm text-gray-500">
+                            Google Maps'te görünen tam işletme adınızı girin.
+                        </p>
+                    </div>
+
+                    <!-- Anahtar Kelime -->
+                    <div>
+                        <label for="keyword" class="block text-sm font-medium text-gray-700">
+                            Anahtar Kelime <span class="text-red-500">*</span>
+                        </label>
+                        <div class="mt-1">
+                            <input type="text" name="keyword" id="keyword" required
+                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                placeholder="Örn: windsurf, nakliyat, kafe, restoran">
+                        </div>
+                        <p class="mt-1 text-sm text-gray-500">
+                            Müşterilerin sizi bulmak için kullanacağı anahtar kelimeyi girin.
+                        </p>
+                    </div>
+
+                    <!-- Koordinatlar -->
+                    <div>
+                        <label for="coordinates" class="block text-sm font-medium text-gray-700">
+                            Merkez Koordinatları <span class="text-red-500">*</span>
+                        </label>
+                        <div class="mt-1">
+                            <input type="text" name="coordinates" id="coordinates" required
+                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                placeholder="@41.0677333,28.9957933">
+                        </div>
+                        <p class="mt-1 text-sm text-gray-500">
+                            Google Maps'ten kopyaladığınız koordinatları yapıştırın.
+                        </p>
+                    </div>
+
+                    <!-- Analiz Yarıçapı -->
+                    <div>
+                        <label for="radius_km" class="block text-sm font-medium text-gray-700">
+                            Analiz Yarıçapı (km)
+                        </label>
+                        <div class="mt-1">
+                            <input type="range" name="radius_km" id="radius_km" 
+                                min="0.5" max="5" step="0.5" value="2"
+                                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                                oninput="document.getElementById('radius_value').textContent = this.value">
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                <span>0.5 km</span>
+                                <span id="radius_value">2 km</span>
+                                <span>5 km</span>
+                            </div>
+                        </div>
+                        <p class="mt-1 text-sm text-gray-500">
+                            Merkez noktadan itibaren kaç km yarıçapında analiz yapılacağını seçin.
+                        </p>
+                    </div>
+
+                    <!-- Nokta Sayısı -->
+                    <div>
+                        <label for="num_points" class="block text-sm font-medium text-gray-700">
+                            Nokta Sayısı
+                        </label>
+                        <div class="mt-1">
+                            <input type="range" name="num_points" id="num_points" 
+                                min="8" max="32" step="8" value="16"
+                                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                                oninput="document.getElementById('points_value').textContent = this.value">
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                <span>8 nokta</span>
+                                <span id="points_value">16 nokta</span>
+                                <span>32 nokta</span>
+                            </div>
+                        </div>
+                        <p class="mt-1 text-sm text-gray-500">
+                            Analiz yapılacak nokta sayısını seçin. Daha fazla nokta daha detaylı analiz sağlar.
+                        </p>
+                    </div>
+
+                    <!-- Şekil Seçimi -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Analiz Şekli</label>
+                        <div class="mt-2 space-x-4">
+                            <div class="flex items-center">
+                                <input type="radio" id="circle" name="shape" value="circle" checked
+                                    class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                <label for="circle" class="ml-2 block text-sm text-gray-700">
+                                    Daire
+                                </label>
+                                <div class="ml-2 text-gray-500">
+                                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="square" name="shape" value="square"
+                                    class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300">
+                                <label for="square" class="ml-2 block text-sm text-gray-700">
+                                    Kare
+                                </label>
+                                <div class="ml-2 text-gray-500">
+                                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <rect x="2" y="2" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mt-1 text-sm text-gray-500">
+                            Analiz noktalarının dağılım şeklini seçin. Daire şekli merkez etrafında eşit dağılım, kare şekli ızgara düzeninde dağılım sağlar.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Butonlar -->
+                <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200">
+                    <a href="{{ url_for('dashboard') }}"
+                        class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <svg class="h-4 w-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                        İptal
+                    </a>
+                    <button type="submit"
+                        class="inline-flex items-center px-6 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <svg class="h-4 w-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        Proje Oluştur
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Yardım Kartı -->
+        <div class="mt-8 bg-white shadow rounded-lg p-6">
+            <h2 class="text-lg font-medium text-gray-900 mb-4">Nasıl Kullanılır?</h2>
+            <div class="space-y-4">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-8 w-8 rounded-full bg-blue-100 text-blue-600">
+                            1
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm text-gray-700">
+                            Google Maps'te işletmenizi arayın ve işletme sayfasını açın.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-8 w-8 rounded-full bg-blue-100 text-blue-600">
+                            2
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm text-gray-700">
+                            Tarayıcınızın adres çubuğundan linki kopyalayın ve yukarıdaki alana yapıştırın.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-8 w-8 rounded-full bg-blue-100 text-blue-600">
+                            3
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm text-gray-700">
+                            İşletmenizin bulunmasını istediğiniz anahtar kelimeyi girin (örn: "nakliyat", "kafe", "restoran").
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center justify-center h-8 w-8 rounded-full bg-blue-100 text-blue-600">
+                            4
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm text-gray-700">
+                            Analiz yarıçapını belirleyin ve projeyi oluşturun. İlk analiz sonuçları birkaç dakika içinde hazır olacak.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function extractBusinessInfo() {
+    const mapsLink = document.getElementById('maps_link').value;
+    
+    try {
+        // İşletme adını çek
+        const businessNameMatch = mapsLink.match(/place\/(.*?)\/[@\?]/);
+        if (businessNameMatch && businessNameMatch[1]) {
+            let businessName = decodeURIComponent(businessNameMatch[1]);
+            businessName = businessName.replace(/\+/g, ' ');
+            document.getElementById('target_business').value = businessName;
+            document.getElementById('name').value = businessName + ' Sıralama Takibi';
+        }
+        
+        // Koordinatları çek
+        const coordsMatch = mapsLink.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+        if (coordsMatch) {
+            const lat = coordsMatch[1];
+            const lng = coordsMatch[2];
+            document.getElementById('coordinates').value = `@${lat},${lng}`;
+        }
+        
+    } catch (error) {
+        alert('Link ayrıştırılırken bir hata oluştu. Lütfen geçerli bir Google Maps işletme linki girdiğinizden emin olun.');
+        console.error('Link ayrıştırma hatası:', error);
+    }
+}
+
+// Koordinat alanına yapıştırılan değeri otomatik olarak düzenle
+document.getElementById('coordinates').addEventListener('paste', function(e) {
+    e.preventDefault();
+    const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+    const coordsMatch = pastedText.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+    if (coordsMatch) {
+        this.value = `@${coordsMatch[1]},${coordsMatch[2]}`;
+    } else {
+        this.value = pastedText;
+    }
+});
+</script>
+{% endblock %} 

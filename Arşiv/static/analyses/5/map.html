@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_39be9dee3079a8e6ad1c7f5ba755164a {
+                    position: relative;
+                    width: 100.0%;
+                    height: 800.0px;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+        <style>
+        #map {
+            width: 100% !important;
+            height: 800px !important;
+            margin: 0 auto;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .leaflet-container {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        </style>
+        
+    
+        <div style="
+            position: fixed; 
+            bottom: 20px; 
+            right: 20px; 
+            z-index: 1000; 
+            background-color: white;
+            padding: 15px; 
+            border: 2px solid #ccc; 
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            max-width: 200px;
+        ">
+            <h4 style="margin: 0 0 10px 0;">Sıralama Göstergeleri</h4>
+            <div style="display: flex; align-items: center; margin: 5px 0;">
+                <span style="color: #28a745; font-size: 24px; margin-right: 10px;">●</span>
+                <span>1-3. sıra</span>
+            </div>
+            <div style="display: flex; align-items: center; margin: 5px 0;">
+                <span style="color: #ffc107; font-size: 24px; margin-right: 10px;">●</span>
+                <span>4-10. sıra</span>
+            </div>
+            <div style="display: flex; align-items: center; margin: 5px 0;">
+                <span style="color: #dc3545; font-size: 24px; margin-right: 10px;">●</span>
+                <span>10+ sıra</span>
+            </div>
+            <div style="display: flex; align-items: center; margin: 5px 0;">
+                <span style="color: #6c757d; font-size: 24px; margin-right: 10px;">●</span>
+                <span>Görünmüyor</span>
+            </div>
+        </div>
+        
+    
+            <div class="folium-map" id="map_39be9dee3079a8e6ad1c7f5ba755164a" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_39be9dee3079a8e6ad1c7f5ba755164a = L.map(
+                "map_39be9dee3079a8e6ad1c7f5ba755164a",
+                {
+                    center: [36.9680635, 27.2919601],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 13,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+            L.control.scale().addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+
+            
+
+        
+    
+            var tile_layer_1f142498c20deeaf74638c6024110a2e = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca target=\"_blank\" href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\"_blank\" href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+                tile_layer_1f142498c20deeaf74638c6024110a2e.addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+    
+            var marker_6e82c352ec39b1b27c4fdcff6ed6fa11 = L.marker(
+                [36.9680635, 27.2919601],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var icon_223211b7d5f93587eddaac8d136bb9d1 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_6e82c352ec39b1b27c4fdcff6ed6fa11.setIcon(icon_223211b7d5f93587eddaac8d136bb9d1);
+        
+    
+        var popup_e03a2036ed33496b27c3ae3fa1cf8805 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_c8c6a62c58aa9164f2a2162a552c22b7 = $(`<div id="html_c8c6a62c58aa9164f2a2162a552c22b7" style="width: 100.0%; height: 100.0%;">Merkez Nokta</div>`)[0];
+                popup_e03a2036ed33496b27c3ae3fa1cf8805.setContent(html_c8c6a62c58aa9164f2a2162a552c22b7);
+            
+        
+
+        marker_6e82c352ec39b1b27c4fdcff6ed6fa11.bindPopup(popup_e03a2036ed33496b27c3ae3fa1cf8805)
+        ;
+
+        
+    
+    
+            marker_6e82c352ec39b1b27c4fdcff6ed6fa11.bindTooltip(
+                `<div>
+                     Merkez
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_cf3016155a5e984df8a006c12eb8c10a = L.circleMarker(
+                [36.9680635, 27.2919601],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_37f4e7b02e5b61a186b1b5f556496713 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_d2d22d7387cbe1ddddf2ff972d28f6be = $(`<div id="html_d2d22d7387cbe1ddddf2ff972d28f6be" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.9680635, 27.2919601                 </p>             </div>             </div>`)[0];
+                popup_37f4e7b02e5b61a186b1b5f556496713.setContent(html_d2d22d7387cbe1ddddf2ff972d28f6be);
+            
+        
+
+        circle_marker_cf3016155a5e984df8a006c12eb8c10a.bindPopup(popup_37f4e7b02e5b61a186b1b5f556496713)
+        ;
+
+        
+    
+    
+            circle_marker_cf3016155a5e984df8a006c12eb8c10a.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_2185d43ff0210337b4527a8133de16f1 = L.marker(
+                [36.9680635, 27.2919601],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_4d1065a127b8cff664417678b19a5c3d = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_2185d43ff0210337b4527a8133de16f1.setIcon(div_icon_4d1065a127b8cff664417678b19a5c3d);
+        
+    
+            var circle_marker_00d23db40974d7de9fbf6557b7c8b273 = L.circleMarker(
+                [37.013029580295935, 27.2919601],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_f78e4ba8dfc5e73779fcb34e8b7abb2a = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_10dee006b3b2dcdb5b73e5fcae2c911f = $(`<div id="html_10dee006b3b2dcdb5b73e5fcae2c911f" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 37.013029580295935, 27.2919601                 </p>             </div>             </div>`)[0];
+                popup_f78e4ba8dfc5e73779fcb34e8b7abb2a.setContent(html_10dee006b3b2dcdb5b73e5fcae2c911f);
+            
+        
+
+        circle_marker_00d23db40974d7de9fbf6557b7c8b273.bindPopup(popup_f78e4ba8dfc5e73779fcb34e8b7abb2a)
+        ;
+
+        
+    
+    
+            circle_marker_00d23db40974d7de9fbf6557b7c8b273.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_ed743d9c6c8510f3e566e2e860cca830 = L.marker(
+                [37.013029580295935, 27.2919601],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_a566babac3173c671bae602ac5b4fb67 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_ed743d9c6c8510f3e566e2e860cca830.setIcon(div_icon_a566babac3173c671bae602ac5b4fb67);
+        
+    
+            var circle_marker_7ce009d974be398ff0451107b23eb4e0 = L.circleMarker(
+                [36.99054654014796, 27.2919601],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_6634308188504424b82b8792fa0bfcfb = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_b2356f14e9276165b057da39b03c50fa = $(`<div id="html_b2356f14e9276165b057da39b03c50fa" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.99054654014796, 27.2919601                 </p>             </div>             </div>`)[0];
+                popup_6634308188504424b82b8792fa0bfcfb.setContent(html_b2356f14e9276165b057da39b03c50fa);
+            
+        
+
+        circle_marker_7ce009d974be398ff0451107b23eb4e0.bindPopup(popup_6634308188504424b82b8792fa0bfcfb)
+        ;
+
+        
+    
+    
+            circle_marker_7ce009d974be398ff0451107b23eb4e0.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b9522b9b1eddac59a34a06cb1ab0e2f5 = L.marker(
+                [36.99054654014796, 27.2919601],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_aa9d82b3adbbdc3fc6e838a6b4546e1d = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_b9522b9b1eddac59a34a06cb1ab0e2f5.setIcon(div_icon_aa9d82b3adbbdc3fc6e838a6b4546e1d);
+        
+    
+            var circle_marker_a8d6e6c664abd9a776b8c0c3759eff59 = L.circleMarker(
+                [37.00960479461003, 27.31350928809824],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_8843e434f22315875615fea2460976d0 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_d2dab8d3d41e88ffc5525cbd773c2702 = $(`<div id="html_d2dab8d3d41e88ffc5525cbd773c2702" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 37.00960479461003, 27.31350928809824                 </p>             </div>             </div>`)[0];
+                popup_8843e434f22315875615fea2460976d0.setContent(html_d2dab8d3d41e88ffc5525cbd773c2702);
+            
+        
+
+        circle_marker_a8d6e6c664abd9a776b8c0c3759eff59.bindPopup(popup_8843e434f22315875615fea2460976d0)
+        ;
+
+        
+    
+    
+            circle_marker_a8d6e6c664abd9a776b8c0c3759eff59.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_2a3af5172bfb432eaa9a48d7ffcbba79 = L.marker(
+                [37.00960479461003, 27.31350928809824],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_0c1a0f8b8b1889fe7b6325b5de5bf24e = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_2a3af5172bfb432eaa9a48d7ffcbba79.setIcon(div_icon_0c1a0f8b8b1889fe7b6325b5de5bf24e);
+        
+    
+            var circle_marker_419775473eacdcf47d92a5877b26323b = L.circleMarker(
+                [36.98883463417415, 27.302731751886693],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_2552c82f3e94acad77b4afdc11cc3091 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_9a74c37aaa24f327e3335c005074fbce = $(`<div id="html_9a74c37aaa24f327e3335c005074fbce" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.98883463417415, 27.302731751886693                 </p>             </div>             </div>`)[0];
+                popup_2552c82f3e94acad77b4afdc11cc3091.setContent(html_9a74c37aaa24f327e3335c005074fbce);
+            
+        
+
+        circle_marker_419775473eacdcf47d92a5877b26323b.bindPopup(popup_2552c82f3e94acad77b4afdc11cc3091)
+        ;
+
+        
+    
+    
+            circle_marker_419775473eacdcf47d92a5877b26323b.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_e02b7d24a2fc742f04e5a87b1b6b4e73 = L.marker(
+                [36.98883463417415, 27.302731751886693],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_2b3d73887fbd310cb93b54b0da07eb36 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_e02b7d24a2fc742f04e5a87b1b6b4e73.setIcon(div_icon_2b3d73887fbd310cb93b54b0da07eb36);
+        
+    
+            var circle_marker_86ee82611fb838fb63d0903abf20d6a5 = L.circleMarker(
+                [36.999852675433786, 27.33177270235438],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_958dd87655b7cddcc21adbf36a28099b = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_47df135b92d76e152db6179078769481 = $(`<div id="html_47df135b92d76e152db6179078769481" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.999852675433786, 27.33177270235438                 </p>             </div>             </div>`)[0];
+                popup_958dd87655b7cddcc21adbf36a28099b.setContent(html_47df135b92d76e152db6179078769481);
+            
+        
+
+        circle_marker_86ee82611fb838fb63d0903abf20d6a5.bindPopup(popup_958dd87655b7cddcc21adbf36a28099b)
+        ;
+
+        
+    
+    
+            circle_marker_86ee82611fb838fb63d0903abf20d6a5.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_3f519846f605fa7ef7cecbe3a8ca474d = L.marker(
+                [36.999852675433786, 27.33177270235438],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_a61cdb2f482a8c5278fdf99c0ccf77a1 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_3f519846f605fa7ef7cecbe3a8ca474d.setIcon(div_icon_a61cdb2f482a8c5278fdf99c0ccf77a1);
+        
+    
+            var circle_marker_54efe4059691294970ec591026736130 = L.circleMarker(
+                [36.9839597494847, 27.31186224227573],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_cda5d7eb583fe763e523b6f8a366ca4e = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_c1ea47f622b4340859ea7f60e92e5dda = $(`<div id="html_c1ea47f622b4340859ea7f60e92e5dda" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.9839597494847, 27.31186224227573                 </p>             </div>             </div>`)[0];
+                popup_cda5d7eb583fe763e523b6f8a366ca4e.setContent(html_c1ea47f622b4340859ea7f60e92e5dda);
+            
+        
+
+        circle_marker_54efe4059691294970ec591026736130.bindPopup(popup_cda5d7eb583fe763e523b6f8a366ca4e)
+        ;
+
+        
+    
+    
+            circle_marker_54efe4059691294970ec591026736130.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_d767a0ca7cabf7df248f27fd567df206 = L.marker(
+                [36.9839597494847, 27.31186224227573],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_30d61f2a995f92e564b9f33cd217e9a7 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_d767a0ca7cabf7df248f27fd567df206.setIcon(div_icon_30d61f2a995f92e564b9f33cd217e9a7);
+        
+    
+            var circle_marker_8685590bd46332d64e01cf37e836e1c3 = L.circleMarker(
+                [36.985259933904636, 27.343967794958495],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_0337671ac8d66961b7c1979d21429332 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_4af460f0fc099bfdb958a9fa53077b03 = $(`<div id="html_4af460f0fc099bfdb958a9fa53077b03" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.985259933904636, 27.343967794958495                 </p>             </div>             </div>`)[0];
+                popup_0337671ac8d66961b7c1979d21429332.setContent(html_4af460f0fc099bfdb958a9fa53077b03);
+            
+        
+
+        circle_marker_8685590bd46332d64e01cf37e836e1c3.bindPopup(popup_0337671ac8d66961b7c1979d21429332)
+        ;
+
+        
+    
+    
+            circle_marker_8685590bd46332d64e01cf37e836e1c3.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_8652cae2ae8fdaf227aa3c495363630e = L.marker(
+                [36.985259933904636, 27.343967794958495],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_98294e48391b1bb269f54f1481986a29 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_8652cae2ae8fdaf227aa3c495363630e.setIcon(div_icon_98294e48391b1bb269f54f1481986a29);
+        
+    
+            var circle_marker_8e4c1ab80075bf8a4fe2c6c9e2aeef16 = L.circleMarker(
+                [36.97666455247184, 27.317961009357994],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_bd4474067ab943ff7a018f3267dcffb6 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_e36d4d20c7874843cbe6909e59d74525 = $(`<div id="html_e36d4d20c7874843cbe6909e59d74525" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.97666455247184, 27.317961009357994                 </p>             </div>             </div>`)[0];
+                popup_bd4474067ab943ff7a018f3267dcffb6.setContent(html_e36d4d20c7874843cbe6909e59d74525);
+            
+        
+
+        circle_marker_8e4c1ab80075bf8a4fe2c6c9e2aeef16.bindPopup(popup_bd4474067ab943ff7a018f3267dcffb6)
+        ;
+
+        
+    
+    
+            circle_marker_8e4c1ab80075bf8a4fe2c6c9e2aeef16.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_0518a3efda51a136ace984ca77b552ef = L.marker(
+                [36.97666455247184, 27.317961009357994],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_f64d1cdc01623fe9e6b4fe6fd15812bc = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_0518a3efda51a136ace984ca77b552ef.setIcon(div_icon_f64d1cdc01623fe9e6b4fe6fd15812bc);
+        
+    
+            var circle_marker_dec37de4e6555a239670d6f77f3454f3 = L.circleMarker(
+                [36.968050219083594, 27.348240095520985],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_668b9e768954b07ad012454e0f1c8d27 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_dbfe79b899e2bc6079ab2404eb4a77b9 = $(`<div id="html_dbfe79b899e2bc6079ab2404eb4a77b9" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.968050219083594, 27.348240095520985                 </p>             </div>             </div>`)[0];
+                popup_668b9e768954b07ad012454e0f1c8d27.setContent(html_dbfe79b899e2bc6079ab2404eb4a77b9);
+            
+        
+
+        circle_marker_dec37de4e6555a239670d6f77f3454f3.bindPopup(popup_668b9e768954b07ad012454e0f1c8d27)
+        ;
+
+        
+    
+    
+            circle_marker_dec37de4e6555a239670d6f77f3454f3.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_71d850ffaa933d403fdf71ed7b114329 = L.marker(
+                [36.968050219083594, 27.348240095520985],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_d426411533f8897a4024940521520bc6 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_71d850ffaa933d403fdf71ed7b114329.setIcon(div_icon_d426411533f8897a4024940521520bc6);
+        
+    
+            var circle_marker_b4a8bd42763afca9661c4e2465ab8fd9 = L.circleMarker(
+                [36.96806017977055, 27.320100100215257],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_27e0628b008f3717adb1a6fedd8df975 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_239baab49bad97d795acac90246e4c4c = $(`<div id="html_239baab49bad97d795acac90246e4c4c" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.96806017977055, 27.320100100215257                 </p>             </div>             </div>`)[0];
+                popup_27e0628b008f3717adb1a6fedd8df975.setContent(html_239baab49bad97d795acac90246e4c4c);
+            
+        
+
+        circle_marker_b4a8bd42763afca9661c4e2465ab8fd9.bindPopup(popup_27e0628b008f3717adb1a6fedd8df975)
+        ;
+
+        
+    
+    
+            circle_marker_b4a8bd42763afca9661c4e2465ab8fd9.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_caeaea52222f4152fe0da90cd08670ac = L.marker(
+                [36.96806017977055, 27.320100100215257],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_97437ed7cb115ce5104c018f10d39672 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_caeaea52222f4152fe0da90cd08670ac.setIcon(div_icon_97437ed7cb115ce5104c018f10d39672);
+        
+    
+            var circle_marker_744c30371281d9c06deb568e13aad14c = L.circleMarker(
+                [36.95084439414992, 27.343944287156887],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_4fdafb5101276bd0a06029f38fe97265 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_0b8c69cfce1c4510f03a288896f59521 = $(`<div id="html_0b8c69cfce1c4510f03a288896f59521" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.95084439414992, 27.343944287156887                 </p>             </div>             </div>`)[0];
+                popup_4fdafb5101276bd0a06029f38fe97265.setContent(html_0b8c69cfce1c4510f03a288896f59521);
+            
+        
+
+        circle_marker_744c30371281d9c06deb568e13aad14c.bindPopup(popup_4fdafb5101276bd0a06029f38fe97265)
+        ;
+
+        
+    
+    
+            circle_marker_744c30371281d9c06deb568e13aad14c.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_fa9f5f641bc69c266cf3fe492cdaf5cb = L.marker(
+                [36.95084439414992, 27.343944287156887],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_7533b8a6a5cbff1674259e9a1b2e050d = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_fa9f5f641bc69c266cf3fe492cdaf5cb.setIcon(div_icon_7533b8a6a5cbff1674259e9a1b2e050d);
+        
+    
+            var circle_marker_b12c91e35d332a4c9013eb679de82d68 = L.circleMarker(
+                [36.95945677954176, 27.317955132405995],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_e5ddc41e23c0599a3902237d200e0c25 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_cd2496ca17ae4cb85b9cb552c47857b6 = $(`<div id="html_cd2496ca17ae4cb85b9cb552c47857b6" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.95945677954176, 27.317955132405995                 </p>             </div>             </div>`)[0];
+                popup_e5ddc41e23c0599a3902237d200e0c25.setContent(html_cd2496ca17ae4cb85b9cb552c47857b6);
+            
+        
+
+        circle_marker_b12c91e35d332a4c9013eb679de82d68.bindPopup(popup_e5ddc41e23c0599a3902237d200e0c25)
+        ;
+
+        
+    
+    
+            circle_marker_b12c91e35d332a4c9013eb679de82d68.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_bdfeed7edad77f1735e379a2daa5db66 = L.marker(
+                [36.95945677954176, 27.317955132405995],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_efee8cd994368f659c30ab4682ae1d03 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_bdfeed7edad77f1735e379a2daa5db66.setIcon(div_icon_efee8cd994368f659c30ab4682ae1d03);
+        
+    
+            var circle_marker_7bdac91f847483a8bfab0ba124405ac6 = L.circleMarker(
+                [36.93626104364384, 27.331739457287085],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_476d9d4ae6acdd5578c2c896050a0316 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_a8f87c322e51163a659d26b4ba2d0c92 = $(`<div id="html_a8f87c322e51163a659d26b4ba2d0c92" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.93626104364384, 27.331739457287085                 </p>             </div>             </div>`)[0];
+                popup_476d9d4ae6acdd5578c2c896050a0316.setContent(html_a8f87c322e51163a659d26b4ba2d0c92);
+            
+        
+
+        circle_marker_7bdac91f847483a8bfab0ba124405ac6.bindPopup(popup_476d9d4ae6acdd5578c2c896050a0316)
+        ;
+
+        
+    
+    
+            circle_marker_7bdac91f847483a8bfab0ba124405ac6.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_15cfc33b24f4e1e4894ea76afcf180d8 = L.marker(
+                [36.93626104364384, 27.331739457287085],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_9860c004e6eb485a645aa9582f69efcd = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_15cfc33b24f4e1e4894ea76afcf180d8.setIcon(div_icon_9860c004e6eb485a645aa9582f69efcd);
+        
+    
+            var circle_marker_2eed02cba2a35194e828f037fb2fc8fb = L.circleMarker(
+                [36.95216393028548, 27.311853931009544],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_8b9c394109d6ea7f1eeb7eb599a33a4d = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_08393d4b7dacf7e9365acdcc7fc376ca = $(`<div id="html_08393d4b7dacf7e9365acdcc7fc376ca" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.95216393028548, 27.311853931009544                 </p>             </div>             </div>`)[0];
+                popup_8b9c394109d6ea7f1eeb7eb599a33a4d.setContent(html_08393d4b7dacf7e9365acdcc7fc376ca);
+            
+        
+
+        circle_marker_2eed02cba2a35194e828f037fb2fc8fb.bindPopup(popup_8b9c394109d6ea7f1eeb7eb599a33a4d)
+        ;
+
+        
+    
+    
+            circle_marker_2eed02cba2a35194e828f037fb2fc8fb.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_df23deeb9d72c226aef4ed0a4883014f = L.marker(
+                [36.95216393028548, 27.311853931009544],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_c0028c971c7ea4ad725f9817083b19b6 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_df23deeb9d72c226aef4ed0a4883014f.setIcon(div_icon_c0028c971c7ea4ad725f9817083b19b6);
+        
+    
+            var circle_marker_6b0c303346c0aed812c7871cbdbd307b = L.circleMarker(
+                [36.92651831549662, 27.313485780274792],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_84a6b24c227ad4eb259a5a2488e19904 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_694e40865bab8c8e2efc10941fa8dc2c = $(`<div id="html_694e40865bab8c8e2efc10941fa8dc2c" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.92651831549662, 27.313485780274792                 </p>             </div>             </div>`)[0];
+                popup_84a6b24c227ad4eb259a5a2488e19904.setContent(html_694e40865bab8c8e2efc10941fa8dc2c);
+            
+        
+
+        circle_marker_6b0c303346c0aed812c7871cbdbd307b.bindPopup(popup_84a6b24c227ad4eb259a5a2488e19904)
+        ;
+
+        
+    
+    
+            circle_marker_6b0c303346c0aed812c7871cbdbd307b.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_207fcba0075dce020a51b84f65c29ce0 = L.marker(
+                [36.92651831549662, 27.313485780274792],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_947c617b7b9bde0a849ba2f2c523e3e0 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_207fcba0075dce020a51b84f65c29ce0.setIcon(div_icon_947c617b7b9bde0a849ba2f2c523e3e0);
+        
+    
+            var circle_marker_cd0946b01bd1bc116c6ab00cb39ad43d = L.circleMarker(
+                [36.94729139335297, 27.30272587493333],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_c957699cab0fd486d4ca7e60b41bb167 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_8dfa08d5eb911312c1a5895892141c36 = $(`<div id="html_8dfa08d5eb911312c1a5895892141c36" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.94729139335297, 27.30272587493333                 </p>             </div>             </div>`)[0];
+                popup_c957699cab0fd486d4ca7e60b41bb167.setContent(html_8dfa08d5eb911312c1a5895892141c36);
+            
+        
+
+        circle_marker_cd0946b01bd1bc116c6ab00cb39ad43d.bindPopup(popup_c957699cab0fd486d4ca7e60b41bb167)
+        ;
+
+        
+    
+    
+            circle_marker_cd0946b01bd1bc116c6ab00cb39ad43d.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_d4e508ab6d11cc9bc4e316c0d14ecd1c = L.marker(
+                [36.94729139335297, 27.30272587493333],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_f1bab547c5666e9fdeee3968d29456c4 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_d4e508ab6d11cc9bc4e316c0d14ecd1c.setIcon(div_icon_f1bab547c5666e9fdeee3968d29456c4);
+        
+    
+            var circle_marker_714762b6f485059195734053acea9b98 = L.circleMarker(
+                [36.92309741970406, 27.2919601],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_5861e9569582d314ce2861718d6d6d60 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_088feb4f65639a4e2594ef6d4061e306 = $(`<div id="html_088feb4f65639a4e2594ef6d4061e306" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.92309741970406, 27.2919601                 </p>             </div>             </div>`)[0];
+                popup_5861e9569582d314ce2861718d6d6d60.setContent(html_088feb4f65639a4e2594ef6d4061e306);
+            
+        
+
+        circle_marker_714762b6f485059195734053acea9b98.bindPopup(popup_5861e9569582d314ce2861718d6d6d60)
+        ;
+
+        
+    
+    
+            circle_marker_714762b6f485059195734053acea9b98.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_ebc86b009f7126389c6348e6b8e4c30d = L.marker(
+                [36.92309741970406, 27.2919601],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_66f1ca618e4db83768637807cb2876ae = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_ebc86b009f7126389c6348e6b8e4c30d.setIcon(div_icon_66f1ca618e4db83768637807cb2876ae);
+        
+    
+            var circle_marker_647f2fb0f459fa6017b248fec9c24a5d = L.circleMarker(
+                [36.945580459852025, 27.2919601],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_8e2094b4201da421a5a7ba10f21c18bf = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_3fcbcc489e77520fed98d0f4ac55fd72 = $(`<div id="html_3fcbcc489e77520fed98d0f4ac55fd72" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.945580459852025, 27.2919601                 </p>             </div>             </div>`)[0];
+                popup_8e2094b4201da421a5a7ba10f21c18bf.setContent(html_3fcbcc489e77520fed98d0f4ac55fd72);
+            
+        
+
+        circle_marker_647f2fb0f459fa6017b248fec9c24a5d.bindPopup(popup_8e2094b4201da421a5a7ba10f21c18bf)
+        ;
+
+        
+    
+    
+            circle_marker_647f2fb0f459fa6017b248fec9c24a5d.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_329683d1daceab152fb96dfe78a302a3 = L.marker(
+                [36.945580459852025, 27.2919601],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_341c285eca817f187ddef510de8ff252 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_329683d1daceab152fb96dfe78a302a3.setIcon(div_icon_341c285eca817f187ddef510de8ff252);
+        
+    
+            var circle_marker_7e0e1ca15eb33f0bccafa8805c56b94a = L.circleMarker(
+                [36.92651831549662, 27.27043441972521],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_59cffa68a44a3f76df2170952a46dc89 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_2042dade39e3b18d1964f39416678207 = $(`<div id="html_2042dade39e3b18d1964f39416678207" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.92651831549662, 27.27043441972521                 </p>             </div>             </div>`)[0];
+                popup_59cffa68a44a3f76df2170952a46dc89.setContent(html_2042dade39e3b18d1964f39416678207);
+            
+        
+
+        circle_marker_7e0e1ca15eb33f0bccafa8805c56b94a.bindPopup(popup_59cffa68a44a3f76df2170952a46dc89)
+        ;
+
+        
+    
+    
+            circle_marker_7e0e1ca15eb33f0bccafa8805c56b94a.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_6e0db04a1026bb6aa95c9329f0224459 = L.marker(
+                [36.92651831549662, 27.27043441972521],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_ab84d360babb5884a5ed3a5729f00ce1 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_6e0db04a1026bb6aa95c9329f0224459.setIcon(div_icon_ab84d360babb5884a5ed3a5729f00ce1);
+        
+    
+            var circle_marker_a86f71773f266990813126039ba60b8e = L.circleMarker(
+                [36.94729139335297, 27.28119432506667],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_624fc80324a570754b483a5639a98d47 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_8954f2a248ebc5286f05f7c3be599618 = $(`<div id="html_8954f2a248ebc5286f05f7c3be599618" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.94729139335297, 27.28119432506667                 </p>             </div>             </div>`)[0];
+                popup_624fc80324a570754b483a5639a98d47.setContent(html_8954f2a248ebc5286f05f7c3be599618);
+            
+        
+
+        circle_marker_a86f71773f266990813126039ba60b8e.bindPopup(popup_624fc80324a570754b483a5639a98d47)
+        ;
+
+        
+    
+    
+            circle_marker_a86f71773f266990813126039ba60b8e.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_66fc7ea91de299594868cf3a2f571463 = L.marker(
+                [36.94729139335297, 27.28119432506667],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_25b7940fd3fa135c4f4ea42cecef1a56 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_66fc7ea91de299594868cf3a2f571463.setIcon(div_icon_25b7940fd3fa135c4f4ea42cecef1a56);
+        
+    
+            var circle_marker_615f3af3b89f71a348d4b7fbef1e2637 = L.circleMarker(
+                [36.93626104364384, 27.252180742712916],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_a9030129f7b6e55a393efd70dcf9b529 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_1b36624e352299477f49c66281a3815c = $(`<div id="html_1b36624e352299477f49c66281a3815c" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.93626104364384, 27.252180742712916                 </p>             </div>             </div>`)[0];
+                popup_a9030129f7b6e55a393efd70dcf9b529.setContent(html_1b36624e352299477f49c66281a3815c);
+            
+        
+
+        circle_marker_615f3af3b89f71a348d4b7fbef1e2637.bindPopup(popup_a9030129f7b6e55a393efd70dcf9b529)
+        ;
+
+        
+    
+    
+            circle_marker_615f3af3b89f71a348d4b7fbef1e2637.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_a58295c92d2a4465d1268079f132740d = L.marker(
+                [36.93626104364384, 27.252180742712916],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_9046c7b72760bb81d3649bd92611e794 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_a58295c92d2a4465d1268079f132740d.setIcon(div_icon_9046c7b72760bb81d3649bd92611e794);
+        
+    
+            var circle_marker_a5d049bf43b4171ad2fd1a1f408bf9a4 = L.circleMarker(
+                [36.95216393028548, 27.272066268990457],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_c2f607d7b72587cb898618cce9e12f2b = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_f3ae3e2c495c116acc757fc52608f0b0 = $(`<div id="html_f3ae3e2c495c116acc757fc52608f0b0" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.95216393028548, 27.272066268990457                 </p>             </div>             </div>`)[0];
+                popup_c2f607d7b72587cb898618cce9e12f2b.setContent(html_f3ae3e2c495c116acc757fc52608f0b0);
+            
+        
+
+        circle_marker_a5d049bf43b4171ad2fd1a1f408bf9a4.bindPopup(popup_c2f607d7b72587cb898618cce9e12f2b)
+        ;
+
+        
+    
+    
+            circle_marker_a5d049bf43b4171ad2fd1a1f408bf9a4.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_72ec7f24b9951f9c43a1b69dd21de732 = L.marker(
+                [36.95216393028548, 27.272066268990457],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_f26d1ac347b9c6fe011ecc0a8595a111 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_72ec7f24b9951f9c43a1b69dd21de732.setIcon(div_icon_f26d1ac347b9c6fe011ecc0a8595a111);
+        
+    
+            var circle_marker_ed3d1e48eade1b8e9336fdbfa931a0f7 = L.circleMarker(
+                [36.95084439414992, 27.239975912843114],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_16a2b46984536cc77c708be2ae8431df = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_d84451695d2c1bd60f11bfa6b4ee585c = $(`<div id="html_d84451695d2c1bd60f11bfa6b4ee585c" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.95084439414992, 27.239975912843114                 </p>             </div>             </div>`)[0];
+                popup_16a2b46984536cc77c708be2ae8431df.setContent(html_d84451695d2c1bd60f11bfa6b4ee585c);
+            
+        
+
+        circle_marker_ed3d1e48eade1b8e9336fdbfa931a0f7.bindPopup(popup_16a2b46984536cc77c708be2ae8431df)
+        ;
+
+        
+    
+    
+            circle_marker_ed3d1e48eade1b8e9336fdbfa931a0f7.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_dd5966b7b30cc0e9abbc8685077b4654 = L.marker(
+                [36.95084439414992, 27.239975912843114],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_ce52d4fbb234ff03b09cdd74d61992bd = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_dd5966b7b30cc0e9abbc8685077b4654.setIcon(div_icon_ce52d4fbb234ff03b09cdd74d61992bd);
+        
+    
+            var circle_marker_1c02c98eeb5cc41953d2811b1df04d3f = L.circleMarker(
+                [36.95945677954176, 27.265965067594006],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_0a97110de5f9981210ce5e10e3eda5a2 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_74cc03de0ca02ba5fbffc4442fc50a8d = $(`<div id="html_74cc03de0ca02ba5fbffc4442fc50a8d" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.95945677954176, 27.265965067594006                 </p>             </div>             </div>`)[0];
+                popup_0a97110de5f9981210ce5e10e3eda5a2.setContent(html_74cc03de0ca02ba5fbffc4442fc50a8d);
+            
+        
+
+        circle_marker_1c02c98eeb5cc41953d2811b1df04d3f.bindPopup(popup_0a97110de5f9981210ce5e10e3eda5a2)
+        ;
+
+        
+    
+    
+            circle_marker_1c02c98eeb5cc41953d2811b1df04d3f.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_a559504c2416229e180178122a11bbc8 = L.marker(
+                [36.95945677954176, 27.265965067594006],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_28ff69ec3177e43da5f71c8d5753c731 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_a559504c2416229e180178122a11bbc8.setIcon(div_icon_28ff69ec3177e43da5f71c8d5753c731);
+        
+    
+            var circle_marker_e174e52094643e1bfd729f8679f40eab = L.circleMarker(
+                [36.968050219083594, 27.235680104479016],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_35ca07986521df04f2313eb3d33dc1fa = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_98b51585d9e345ad629c06c6c61c457b = $(`<div id="html_98b51585d9e345ad629c06c6c61c457b" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.968050219083594, 27.235680104479016                 </p>             </div>             </div>`)[0];
+                popup_35ca07986521df04f2313eb3d33dc1fa.setContent(html_98b51585d9e345ad629c06c6c61c457b);
+            
+        
+
+        circle_marker_e174e52094643e1bfd729f8679f40eab.bindPopup(popup_35ca07986521df04f2313eb3d33dc1fa)
+        ;
+
+        
+    
+    
+            circle_marker_e174e52094643e1bfd729f8679f40eab.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_7591ca26bf259434c678439f8a720d2b = L.marker(
+                [36.968050219083594, 27.235680104479016],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_c59f88f692c5353b2d409d14b027cfc0 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_7591ca26bf259434c678439f8a720d2b.setIcon(div_icon_c59f88f692c5353b2d409d14b027cfc0);
+        
+    
+            var circle_marker_b39f0152814a2f06221c3787742d4eea = L.circleMarker(
+                [36.96806017977055, 27.263820099784745],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_a301c9f7051f2dfd4d27cfedead2fa4c = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_b49d8b315a58f08f11404cf8518094c7 = $(`<div id="html_b49d8b315a58f08f11404cf8518094c7" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.96806017977055, 27.263820099784745                 </p>             </div>             </div>`)[0];
+                popup_a301c9f7051f2dfd4d27cfedead2fa4c.setContent(html_b49d8b315a58f08f11404cf8518094c7);
+            
+        
+
+        circle_marker_b39f0152814a2f06221c3787742d4eea.bindPopup(popup_a301c9f7051f2dfd4d27cfedead2fa4c)
+        ;
+
+        
+    
+    
+            circle_marker_b39f0152814a2f06221c3787742d4eea.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b86253445a5b3564a38a9a042d24e735 = L.marker(
+                [36.96806017977055, 27.263820099784745],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_64ae6b4992553bdcd69fc2dba486d1b3 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_b86253445a5b3564a38a9a042d24e735.setIcon(div_icon_64ae6b4992553bdcd69fc2dba486d1b3);
+        
+    
+            var circle_marker_88ed71263d0213b86f604e3880a8e5c7 = L.circleMarker(
+                [36.985259933904636, 27.239952405041507],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_652f9edf338219ab0f7cec9c6ce9bb64 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_e5aa34897246aa688642b3fc9f6dc9f2 = $(`<div id="html_e5aa34897246aa688642b3fc9f6dc9f2" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.985259933904636, 27.239952405041507                 </p>             </div>             </div>`)[0];
+                popup_652f9edf338219ab0f7cec9c6ce9bb64.setContent(html_e5aa34897246aa688642b3fc9f6dc9f2);
+            
+        
+
+        circle_marker_88ed71263d0213b86f604e3880a8e5c7.bindPopup(popup_652f9edf338219ab0f7cec9c6ce9bb64)
+        ;
+
+        
+    
+    
+            circle_marker_88ed71263d0213b86f604e3880a8e5c7.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_50db79627d0de33eef4b15c08ad6d434 = L.marker(
+                [36.985259933904636, 27.239952405041507],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_c0b4f96e9065bd5756ccaa0cd925aa2b = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_50db79627d0de33eef4b15c08ad6d434.setIcon(div_icon_c0b4f96e9065bd5756ccaa0cd925aa2b);
+        
+    
+            var circle_marker_4f29be9da04a118caa7135760cbc4ba0 = L.circleMarker(
+                [36.97666455247184, 27.265959190642008],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_586d4d0c66b84bbde0aec8ca16a21fb4 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_c6b109d0b34764deb2cfee00029ce14b = $(`<div id="html_c6b109d0b34764deb2cfee00029ce14b" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.97666455247184, 27.265959190642008                 </p>             </div>             </div>`)[0];
+                popup_586d4d0c66b84bbde0aec8ca16a21fb4.setContent(html_c6b109d0b34764deb2cfee00029ce14b);
+            
+        
+
+        circle_marker_4f29be9da04a118caa7135760cbc4ba0.bindPopup(popup_586d4d0c66b84bbde0aec8ca16a21fb4)
+        ;
+
+        
+    
+    
+            circle_marker_4f29be9da04a118caa7135760cbc4ba0.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_1d2555018eae81260330a83c25332a92 = L.marker(
+                [36.97666455247184, 27.265959190642008],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_111dfefa4b6465b710594a6430473e0a = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_1d2555018eae81260330a83c25332a92.setIcon(div_icon_111dfefa4b6465b710594a6430473e0a);
+        
+    
+            var circle_marker_c693f47c3ef23a3f88c4f259fd155865 = L.circleMarker(
+                [36.999852675433786, 27.25214749764562],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_476920e60fbdd4aa24c8f406f8a344ca = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_39e7855b46d00db2fbc5d0bf83555892 = $(`<div id="html_39e7855b46d00db2fbc5d0bf83555892" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.999852675433786, 27.25214749764562                 </p>             </div>             </div>`)[0];
+                popup_476920e60fbdd4aa24c8f406f8a344ca.setContent(html_39e7855b46d00db2fbc5d0bf83555892);
+            
+        
+
+        circle_marker_c693f47c3ef23a3f88c4f259fd155865.bindPopup(popup_476920e60fbdd4aa24c8f406f8a344ca)
+        ;
+
+        
+    
+    
+            circle_marker_c693f47c3ef23a3f88c4f259fd155865.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_d03a7070fbd1e5d612bf6352fd82282b = L.marker(
+                [36.999852675433786, 27.25214749764562],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_333b23c8db3cf041c37640808252d399 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_d03a7070fbd1e5d612bf6352fd82282b.setIcon(div_icon_333b23c8db3cf041c37640808252d399);
+        
+    
+            var circle_marker_506e864192987e6664d697f3af1717bc = L.circleMarker(
+                [36.9839597494847, 27.27205795772427],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_761f537f8969aa1f3e8a48d855e1cd8f = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_d026906bc1b6bac4467372634a62ace4 = $(`<div id="html_d026906bc1b6bac4467372634a62ace4" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.9839597494847, 27.27205795772427                 </p>             </div>             </div>`)[0];
+                popup_761f537f8969aa1f3e8a48d855e1cd8f.setContent(html_d026906bc1b6bac4467372634a62ace4);
+            
+        
+
+        circle_marker_506e864192987e6664d697f3af1717bc.bindPopup(popup_761f537f8969aa1f3e8a48d855e1cd8f)
+        ;
+
+        
+    
+    
+            circle_marker_506e864192987e6664d697f3af1717bc.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_03e5f9cd443f558fd1a03c3d94ef3d58 = L.marker(
+                [36.9839597494847, 27.27205795772427],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_7b876be1746b19e38f35ec76617eb578 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_03e5f9cd443f558fd1a03c3d94ef3d58.setIcon(div_icon_7b876be1746b19e38f35ec76617eb578);
+        
+    
+            var circle_marker_6aa421ff1bd757ad4d73ac9b727a8cc9 = L.circleMarker(
+                [37.00960479461003, 27.270410911901763],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_1ebbf9c6e61297a3f57398874a5ea34a = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_92caad1a079922b069c808b0c774649c = $(`<div id="html_92caad1a079922b069c808b0c774649c" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 37.00960479461003, 27.270410911901763                 </p>             </div>             </div>`)[0];
+                popup_1ebbf9c6e61297a3f57398874a5ea34a.setContent(html_92caad1a079922b069c808b0c774649c);
+            
+        
+
+        circle_marker_6aa421ff1bd757ad4d73ac9b727a8cc9.bindPopup(popup_1ebbf9c6e61297a3f57398874a5ea34a)
+        ;
+
+        
+    
+    
+            circle_marker_6aa421ff1bd757ad4d73ac9b727a8cc9.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_1557a18034ce7161765d8cb811ac7a4f = L.marker(
+                [37.00960479461003, 27.270410911901763],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_840d01ab7ab7715b03e0236c6a646745 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_1557a18034ce7161765d8cb811ac7a4f.setIcon(div_icon_840d01ab7ab7715b03e0236c6a646745);
+        
+    
+            var circle_marker_ec0f355c0222086388b2b2d6692eeea7 = L.circleMarker(
+                [36.98883463417415, 27.28118844811331],
+                {"bubblingMouseEvents": true, "color": "#28a745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28a745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 25, "stroke": true, "weight": 3}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+        var popup_e25198ba6eba145fceca5778703c70c2 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_91d8f632e25c7d620aa510d7e76b3cfd = $(`<div id="html_91d8f632e25c7d620aa510d7e76b3cfd" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #28a745; font-size: 16px;'>                     1. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <b>Puan:</b> 4.9/5.0<br>                     <b>Değerlendirme:</b> 70                 </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 36.98883463417415, 27.28118844811331                 </p>             </div>             </div>`)[0];
+                popup_e25198ba6eba145fceca5778703c70c2.setContent(html_91d8f632e25c7d620aa510d7e76b3cfd);
+            
+        
+
+        circle_marker_ec0f355c0222086388b2b2d6692eeea7.bindPopup(popup_e25198ba6eba145fceca5778703c70c2)
+        ;
+
+        
+    
+    
+            circle_marker_ec0f355c0222086388b2b2d6692eeea7.bindTooltip(
+                `<div>
+                     <b>1. sıra</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_01f1055e1d0047fb1c10d0bb3289fcc1 = L.marker(
+                [36.98883463417415, 27.28118844811331],
+                {}
+            ).addTo(map_39be9dee3079a8e6ad1c7f5ba755164a);
+        
+    
+            var div_icon_2fc56d65f283f403ba9d4cfd27830df4 = L.divIcon({"className": "empty", "html": "\n                            \u003cdiv style=\"\n                                background-color: #28a745;\n                                color: white;\n                                border-radius: 50%;\n                                width: 24px;\n                                height: 24px;\n                                display: flex;\n                                align-items: center;\n                                justify-content: center;\n                                font-weight: bold;\n                                font-size: 14px;\n                                box-shadow: 0 0 5px rgba(0,0,0,0.3);\n                            \"\u003e\n                                1\n                            \u003c/div\u003e\n                        ", "iconAnchor": [12, 12], "iconSize": [24, 24]});
+            marker_01f1055e1d0047fb1c10d0bb3289fcc1.setIcon(div_icon_2fc56d65f283f403ba9d4cfd27830df4);
+        
+</script>
+</html>

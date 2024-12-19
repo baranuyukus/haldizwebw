@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_fe2c3eff620147f76d2b9c517a7769f7 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 800.0px;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+        <style>
+        #map {
+            width: 100% !important;
+            height: 800px !important;
+            margin: 0 auto;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .leaflet-container {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        </style>
+        
+    
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var mapDiv = document.querySelector('#map');
+            var fsButton = document.createElement('button');
+            fsButton.innerHTML = '⛶';
+            fsButton.style.cssText = 'position: absolute; top: 10px; left: 10px; z-index: 999; background: white; border: 2px solid rgba(0,0,0,0.2); border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 16px;';
+            fsButton.onclick = function() {
+                if (!document.fullscreenElement) {
+                    mapDiv.requestFullscreen();
+                    fsButton.innerHTML = '⮌';
+                } else {
+                    document.exitFullscreen();
+                    fsButton.innerHTML = '⛶';
+                }
+            };
+            mapDiv.style.position = 'relative';
+            mapDiv.appendChild(fsButton);
+            
+            // Haritayı yeniden boyutlandır
+            setTimeout(function() {
+                map.invalidateSize();
+                map.setView([${float(lat)}, ${float(lon)}], 13);
+            }, 100);
+        });
+        </script>
+        
+    
+        <div style="
+            position: fixed; 
+            bottom: 20px; 
+            right: 20px; 
+            z-index: 1000; 
+            background-color: white;
+            padding: 15px; 
+            border: 2px solid #ccc; 
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            max-width: 200px;
+        ">
+            <h4 style="margin: 0 0 10px 0;">Sıralama Göstergeleri</h4>
+            <div style="display: flex; align-items: center; margin: 5px 0;">
+                <span style="color: #28a745; font-size: 24px; margin-right: 10px;">●</span>
+                <span>1-3. sıra</span>
+            </div>
+            <div style="display: flex; align-items: center; margin: 5px 0;">
+                <span style="color: #ffc107; font-size: 24px; margin-right: 10px;">●</span>
+                <span>4-10. sıra</span>
+            </div>
+            <div style="display: flex; align-items: center; margin: 5px 0;">
+                <span style="color: #dc3545; font-size: 24px; margin-right: 10px;">●</span>
+                <span>10+ sıra</span>
+            </div>
+            <div style="display: flex; align-items: center; margin: 5px 0;">
+                <span style="color: #6c757d; font-size: 24px; margin-right: 10px;">●</span>
+                <span>Görünmüyor</span>
+            </div>
+        </div>
+        
+    
+            <div class="folium-map" id="map_fe2c3eff620147f76d2b9c517a7769f7" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_fe2c3eff620147f76d2b9c517a7769f7 = L.map(
+                "map_fe2c3eff620147f76d2b9c517a7769f7",
+                {
+                    center: [40.9884709, 29.0308624],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 13,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+            L.control.scale().addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+
+            
+
+        
+    
+            var tile_layer_ab738b63c113ddf271db7b8ec64eb830 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca target=\"_blank\" href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\"_blank\" href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+                tile_layer_ab738b63c113ddf271db7b8ec64eb830.addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+    
+            var marker_5aed4f4b6f11d87c97221ea2319df237 = L.marker(
+                [40.9884709, 29.0308624],
+                {}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+            var icon_584dee71013d1261ec055a113cb4273e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_5aed4f4b6f11d87c97221ea2319df237.setIcon(icon_584dee71013d1261ec055a113cb4273e);
+        
+    
+        var popup_da74bde25e5b55877be0446a0dd55446 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_4ffc8ad528d16af51b4b940e0646a22a = $(`<div id="html_4ffc8ad528d16af51b4b940e0646a22a" style="width: 100.0%; height: 100.0%;">Merkez Nokta</div>`)[0];
+                popup_da74bde25e5b55877be0446a0dd55446.setContent(html_4ffc8ad528d16af51b4b940e0646a22a);
+            
+        
+
+        marker_5aed4f4b6f11d87c97221ea2319df237.bindPopup(popup_da74bde25e5b55877be0446a0dd55446)
+        ;
+
+        
+    
+    
+            marker_5aed4f4b6f11d87c97221ea2319df237.bindTooltip(
+                `<div>
+                     Merkez
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_138a0f31eccc43f9f77a796cc055609b = L.circleMarker(
+                [40.9884709, 29.0308624],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_eed29bd8bc683ae4ea0123d712dcf092 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_76d9737f78df901bf2fa155a8150343a = $(`<div id="html_76d9737f78df901bf2fa155a8150343a" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.9884709, 29.0308624                 </p>             </div>             </div>`)[0];
+                popup_eed29bd8bc683ae4ea0123d712dcf092.setContent(html_76d9737f78df901bf2fa155a8150343a);
+            
+        
+
+        circle_marker_138a0f31eccc43f9f77a796cc055609b.bindPopup(popup_eed29bd8bc683ae4ea0123d712dcf092)
+        ;
+
+        
+    
+    
+            circle_marker_138a0f31eccc43f9f77a796cc055609b.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_8c130ae92962ad770a880e8b0f7eae64 = L.circleMarker(
+                [41.02444376423675, 29.030862400000004],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_f08b8ec3753082256d7d1029bf411b8c = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_b23c5c9b6e318f04afdc826206203d91 = $(`<div id="html_b23c5c9b6e318f04afdc826206203d91" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 41.02444376423675, 29.030862400000004                 </p>             </div>             </div>`)[0];
+                popup_f08b8ec3753082256d7d1029bf411b8c.setContent(html_b23c5c9b6e318f04afdc826206203d91);
+            
+        
+
+        circle_marker_8c130ae92962ad770a880e8b0f7eae64.bindPopup(popup_f08b8ec3753082256d7d1029bf411b8c)
+        ;
+
+        
+    
+    
+            circle_marker_8c130ae92962ad770a880e8b0f7eae64.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_605e28264b19c58aa1ffc46036987752 = L.circleMarker(
+                [41.00645733211839, 29.030862400000004],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_02708c3a43b3d04ff9d244be2d0610fc = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_a670e2a3169dd7b61beaf08d9957828a = $(`<div id="html_a670e2a3169dd7b61beaf08d9957828a" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 41.00645733211839, 29.030862400000004                 </p>             </div>             </div>`)[0];
+                popup_02708c3a43b3d04ff9d244be2d0610fc.setContent(html_a670e2a3169dd7b61beaf08d9957828a);
+            
+        
+
+        circle_marker_605e28264b19c58aa1ffc46036987752.bindPopup(popup_02708c3a43b3d04ff9d244be2d0610fc)
+        ;
+
+        
+    
+    
+            circle_marker_605e28264b19c58aa1ffc46036987752.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_4c84834d4dd5a206faf4d535c9a63563 = L.circleMarker(
+                [41.02170405492785, 29.049108828077223],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_43279cadd045fa7f89b5269cf99535cc = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_309b6d229796b03f3de362b7d1383eaf = $(`<div id="html_309b6d229796b03f3de362b7d1383eaf" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 41.02170405492785, 29.049108828077223                 </p>             </div>             </div>`)[0];
+                popup_43279cadd045fa7f89b5269cf99535cc.setContent(html_309b6d229796b03f3de362b7d1383eaf);
+            
+        
+
+        circle_marker_4c84834d4dd5a206faf4d535c9a63563.bindPopup(popup_43279cadd045fa7f89b5269cf99535cc)
+        ;
+
+        
+    
+    
+            circle_marker_4c84834d4dd5a206faf4d535c9a63563.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_7cfaf4517c2409e91dc4f937b0918c90 = L.circleMarker(
+                [41.005087837111134, 29.039983313615302],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_5310df35d2392257ec79525aa61434f2 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_20338698df86cb2524be7c5f8b2c9aae = $(`<div id="html_20338698df86cb2524be7c5f8b2c9aae" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 41.005087837111134, 29.039983313615302                 </p>             </div>             </div>`)[0];
+                popup_5310df35d2392257ec79525aa61434f2.setContent(html_20338698df86cb2524be7c5f8b2c9aae);
+            
+        
+
+        circle_marker_7cfaf4517c2409e91dc4f937b0918c90.bindPopup(popup_5310df35d2392257ec79525aa61434f2)
+        ;
+
+        
+    
+    
+            circle_marker_7cfaf4517c2409e91dc4f937b0918c90.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_181c9803dad19b6006c9af03ab715e08 = L.circleMarker(
+                [41.01390264721265, 29.064573411405284],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_ee34cfca243e3f81d735335916e1c419 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_379f9eb0a5d6720cc4bcf43edb1250d4 = $(`<div id="html_379f9eb0a5d6720cc4bcf43edb1250d4" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 41.01390264721265, 29.064573411405284                 </p>             </div>             </div>`)[0];
+                popup_ee34cfca243e3f81d735335916e1c419.setContent(html_379f9eb0a5d6720cc4bcf43edb1250d4);
+            
+        
+
+        circle_marker_181c9803dad19b6006c9af03ab715e08.bindPopup(popup_ee34cfca243e3f81d735335916e1c419)
+        ;
+
+        
+    
+    
+            circle_marker_181c9803dad19b6006c9af03ab715e08.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_28c58439a2a0fadc374975f0cd829a18 = L.circleMarker(
+                [41.00118800120454, 29.04771465373214],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_5ed1a39910f9cedd87606b133ff33709 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_deb3d536eadefec4f02a790280395ca3 = $(`<div id="html_deb3d536eadefec4f02a790280395ca3" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 41.00118800120454, 29.04771465373214                 </p>             </div>             </div>`)[0];
+                popup_5ed1a39910f9cedd87606b133ff33709.setContent(html_deb3d536eadefec4f02a790280395ca3);
+            
+        
+
+        circle_marker_28c58439a2a0fadc374975f0cd829a18.bindPopup(popup_5ed1a39910f9cedd87606b133ff33709)
+        ;
+
+        
+    
+    
+            circle_marker_28c58439a2a0fadc374975f0cd829a18.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_38cffcfbad9b7a330b9b91f47bfde362 = L.circleMarker(
+                [41.0022287410622, 29.074900158126578],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_f04df7923ff1195e41a2463937f24cfa = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_d02aeb95b6addceac6bad210e0f0be6a = $(`<div id="html_d02aeb95b6addceac6bad210e0f0be6a" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 41.0022287410622, 29.074900158126578                 </p>             </div>             </div>`)[0];
+                popup_f04df7923ff1195e41a2463937f24cfa.setContent(html_d02aeb95b6addceac6bad210e0f0be6a);
+            
+        
+
+        circle_marker_38cffcfbad9b7a330b9b91f47bfde362.bindPopup(popup_f04df7923ff1195e41a2463937f24cfa)
+        ;
+
+        
+    
+    
+            circle_marker_38cffcfbad9b7a330b9b91f47bfde362.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_e2300289c949603d552fd31d1014b25a = L.circleMarker(
+                [40.995351915370144, 29.05287898140863],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_1a18f0ff8df5ad82201c9690afad3492 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_3c0846fdc24e94216156fc8db23ae32d = $(`<div id="html_3c0846fdc24e94216156fc8db23ae32d" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.995351915370144, 29.05287898140863                 </p>             </div>             </div>`)[0];
+                popup_1a18f0ff8df5ad82201c9690afad3492.setContent(html_3c0846fdc24e94216156fc8db23ae32d);
+            
+        
+
+        circle_marker_e2300289c949603d552fd31d1014b25a.bindPopup(popup_1a18f0ff8df5ad82201c9690afad3492)
+        ;
+
+        
+    
+    
+            circle_marker_e2300289c949603d552fd31d1014b25a.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_b2cf1c5086aa18992357641a95ffa1ed = L.circleMarker(
+                [40.98846108740406, 29.078518572809855],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_c73b3a07b4a7c2dd2b64c28b19e49a94 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_5bf1f4542d5a01d68fe53fe2755ad50b = $(`<div id="html_5bf1f4542d5a01d68fe53fe2755ad50b" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.98846108740406, 29.078518572809855                 </p>             </div>             </div>`)[0];
+                popup_c73b3a07b4a7c2dd2b64c28b19e49a94.setContent(html_5bf1f4542d5a01d68fe53fe2755ad50b);
+            
+        
+
+        circle_marker_b2cf1c5086aa18992357641a95ffa1ed.bindPopup(popup_c73b3a07b4a7c2dd2b64c28b19e49a94)
+        ;
+
+        
+    
+    
+            circle_marker_b2cf1c5086aa18992357641a95ffa1ed.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_df9786d3b126d0e79f336bc89a1e3c6f = L.circleMarker(
+                [40.988468446850824, 29.05469048817792],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_c10a885e579ac98db80081a112be1608 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_0959d2259234ef59552f7741848321cf = $(`<div id="html_0959d2259234ef59552f7741848321cf" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.988468446850824, 29.05469048817792                 </p>             </div>             </div>`)[0];
+                popup_c10a885e579ac98db80081a112be1608.setContent(html_0959d2259234ef59552f7741848321cf);
+            
+        
+
+        circle_marker_df9786d3b126d0e79f336bc89a1e3c6f.bindPopup(popup_c10a885e579ac98db80081a112be1608)
+        ;
+
+        
+    
+    
+            circle_marker_df9786d3b126d0e79f336bc89a1e3c6f.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_35860ae0b892b554afa63682fae3cd46 = L.circleMarker(
+                [40.9746963077871, 29.07488177399908],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_6071ba4edc3e37578f8d69d23b183394 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_355c5f49113a3a0a06f9b7264484aea5 = $(`<div id="html_355c5f49113a3a0a06f9b7264484aea5" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.9746963077871, 29.07488177399908                 </p>             </div>             </div>`)[0];
+                popup_6071ba4edc3e37578f8d69d23b183394.setContent(html_355c5f49113a3a0a06f9b7264484aea5);
+            
+        
+
+        circle_marker_35860ae0b892b554afa63682fae3cd46.bindPopup(popup_6071ba4edc3e37578f8d69d23b183394)
+        ;
+
+        
+    
+    
+            circle_marker_35860ae0b892b554afa63682fae3cd46.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_d5101c5d4ca7ff560dfbcb19dee9a672 = L.circleMarker(
+                [40.98158569684216, 29.052874385375777],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_32845dca4624e5c519bf9d9ef14b0ecc = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_afe4087e53033be0be5e4677c32d9cc6 = $(`<div id="html_afe4087e53033be0be5e4677c32d9cc6" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.98158569684216, 29.052874385375777                 </p>             </div>             </div>`)[0];
+                popup_32845dca4624e5c519bf9d9ef14b0ecc.setContent(html_afe4087e53033be0be5e4677c32d9cc6);
+            
+        
+
+        circle_marker_d5101c5d4ca7ff560dfbcb19dee9a672.bindPopup(popup_32845dca4624e5c519bf9d9ef14b0ecc)
+        ;
+
+        
+    
+    
+            circle_marker_d5101c5d4ca7ff560dfbcb19dee9a672.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_d8ce110190a1c286d1aaf0ae258398d8 = L.circleMarker(
+                [40.963029340188136, 29.06454741231375],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_e0f219b8cec492677b3cc4a2435b5db4 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_eeedd9c99cd06dc717bc341a0eaa15c7 = $(`<div id="html_eeedd9c99cd06dc717bc341a0eaa15c7" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.963029340188136, 29.06454741231375                 </p>             </div>             </div>`)[0];
+                popup_e0f219b8cec492677b3cc4a2435b5db4.setContent(html_eeedd9c99cd06dc717bc341a0eaa15c7);
+            
+        
+
+        circle_marker_d8ce110190a1c286d1aaf0ae258398d8.bindPopup(popup_e0f219b8cec492677b3cc4a2435b5db4)
+        ;
+
+        
+    
+    
+            circle_marker_d8ce110190a1c286d1aaf0ae258398d8.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_b51772fae7c9da876332a318e8dc5bb0 = L.circleMarker(
+                [40.97575134564609, 29.047708153959572],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_9936a0105cd31a05d2d18808610f2120 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_2536e558708a705d003b53700ff48752 = $(`<div id="html_2536e558708a705d003b53700ff48752" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.97575134564609, 29.047708153959572                 </p>             </div>             </div>`)[0];
+                popup_9936a0105cd31a05d2d18808610f2120.setContent(html_2536e558708a705d003b53700ff48752);
+            
+        
+
+        circle_marker_b51772fae7c9da876332a318e8dc5bb0.bindPopup(popup_9936a0105cd31a05d2d18808610f2120)
+        ;
+
+        
+    
+    
+            circle_marker_b51772fae7c9da876332a318e8dc5bb0.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_580afa9e445c6dae4ff0ede3e58fcd94 = L.circleMarker(
+                [40.9552348710277, 29.04909044393687],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_6f72df2a2ab14e3621309f976e00ca6f = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_05606636b514aa5892c4348bd7a57ab6 = $(`<div id="html_05606636b514aa5892c4348bd7a57ab6" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.9552348710277, 29.04909044393687                 </p>             </div>             </div>`)[0];
+                popup_6f72df2a2ab14e3621309f976e00ca6f.setContent(html_05606636b514aa5892c4348bd7a57ab6);
+            
+        
+
+        circle_marker_580afa9e445c6dae4ff0ede3e58fcd94.bindPopup(popup_6f72df2a2ab14e3621309f976e00ca6f)
+        ;
+
+        
+    
+    
+            circle_marker_580afa9e445c6dae4ff0ede3e58fcd94.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_4378c212b252c50bb0f909c7ffa1092f = L.circleMarker(
+                [40.97185324437801, 29.039978717581647],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_cb36868c9afa9efe7a822f6a3f0f993a = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_ef5ccebdab446085e56291e6fa1fc3f8 = $(`<div id="html_ef5ccebdab446085e56291e6fa1fc3f8" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.97185324437801, 29.039978717581647                 </p>             </div>             </div>`)[0];
+                popup_cb36868c9afa9efe7a822f6a3f0f993a.setContent(html_ef5ccebdab446085e56291e6fa1fc3f8);
+            
+        
+
+        circle_marker_4378c212b252c50bb0f909c7ffa1092f.bindPopup(popup_cb36868c9afa9efe7a822f6a3f0f993a)
+        ;
+
+        
+    
+    
+            circle_marker_4378c212b252c50bb0f909c7ffa1092f.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_a9b971ea30f43388f3d12d229f8f49e1 = L.circleMarker(
+                [40.95249803576325, 29.030862400000004],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_82362b2b34ef004a1856da3a39ea108f = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_c7fcb7c0db1d3a67965914c47b0264e4 = $(`<div id="html_c7fcb7c0db1d3a67965914c47b0264e4" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.95249803576325, 29.030862400000004                 </p>             </div>             </div>`)[0];
+                popup_82362b2b34ef004a1856da3a39ea108f.setContent(html_c7fcb7c0db1d3a67965914c47b0264e4);
+            
+        
+
+        circle_marker_a9b971ea30f43388f3d12d229f8f49e1.bindPopup(popup_82362b2b34ef004a1856da3a39ea108f)
+        ;
+
+        
+    
+    
+            circle_marker_a9b971ea30f43388f3d12d229f8f49e1.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_2c38796e37c6f43e1389b5f6a0ec9989 = L.circleMarker(
+                [40.970484467881626, 29.030862400000004],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_06f86d4a8618ff81eb34ea01acf5287a = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_f698a2519da0bc014065c5c11407395b = $(`<div id="html_f698a2519da0bc014065c5c11407395b" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.970484467881626, 29.030862400000004                 </p>             </div>             </div>`)[0];
+                popup_06f86d4a8618ff81eb34ea01acf5287a.setContent(html_f698a2519da0bc014065c5c11407395b);
+            
+        
+
+        circle_marker_2c38796e37c6f43e1389b5f6a0ec9989.bindPopup(popup_06f86d4a8618ff81eb34ea01acf5287a)
+        ;
+
+        
+    
+    
+            circle_marker_2c38796e37c6f43e1389b5f6a0ec9989.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_449084af5ecf339cbe38a1dc8561ca96 = L.circleMarker(
+                [40.9552348710277, 29.01263435606314],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_5826bd61e7528d805774a03c319828f1 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_50aa96707b3d811f860bd50f9ea654af = $(`<div id="html_50aa96707b3d811f860bd50f9ea654af" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.9552348710277, 29.01263435606314                 </p>             </div>             </div>`)[0];
+                popup_5826bd61e7528d805774a03c319828f1.setContent(html_50aa96707b3d811f860bd50f9ea654af);
+            
+        
+
+        circle_marker_449084af5ecf339cbe38a1dc8561ca96.bindPopup(popup_5826bd61e7528d805774a03c319828f1)
+        ;
+
+        
+    
+    
+            circle_marker_449084af5ecf339cbe38a1dc8561ca96.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_be2f26a839fd3e36b12b07ed0b601d8c = L.circleMarker(
+                [40.97185324437801, 29.02174608241836],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_0dcac62338a030e41a44dc5724bebf92 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_8865446f0804f0acece32f372a81af8e = $(`<div id="html_8865446f0804f0acece32f372a81af8e" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.97185324437801, 29.02174608241836                 </p>             </div>             </div>`)[0];
+                popup_0dcac62338a030e41a44dc5724bebf92.setContent(html_8865446f0804f0acece32f372a81af8e);
+            
+        
+
+        circle_marker_be2f26a839fd3e36b12b07ed0b601d8c.bindPopup(popup_0dcac62338a030e41a44dc5724bebf92)
+        ;
+
+        
+    
+    
+            circle_marker_be2f26a839fd3e36b12b07ed0b601d8c.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_1d2066731d4707f2784d4efd298d1566 = L.circleMarker(
+                [40.963029340188136, 28.997177387686257],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_443621c7308522b971d370849ccadaf4 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_4f429b4ff013f3e3ef6a8e96b7c3320f = $(`<div id="html_4f429b4ff013f3e3ef6a8e96b7c3320f" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.963029340188136, 28.997177387686257                 </p>             </div>             </div>`)[0];
+                popup_443621c7308522b971d370849ccadaf4.setContent(html_4f429b4ff013f3e3ef6a8e96b7c3320f);
+            
+        
+
+        circle_marker_1d2066731d4707f2784d4efd298d1566.bindPopup(popup_443621c7308522b971d370849ccadaf4)
+        ;
+
+        
+    
+    
+            circle_marker_1d2066731d4707f2784d4efd298d1566.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_f587bfb4a57c5fa9ce17e4b87c94918b = L.circleMarker(
+                [40.97575134564609, 29.014016646040435],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_869c336892a64c222a1ee8c64352422e = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_c8501d617d0fd4fe2669a3c456624941 = $(`<div id="html_c8501d617d0fd4fe2669a3c456624941" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.97575134564609, 29.014016646040435                 </p>             </div>             </div>`)[0];
+                popup_869c336892a64c222a1ee8c64352422e.setContent(html_c8501d617d0fd4fe2669a3c456624941);
+            
+        
+
+        circle_marker_f587bfb4a57c5fa9ce17e4b87c94918b.bindPopup(popup_869c336892a64c222a1ee8c64352422e)
+        ;
+
+        
+    
+    
+            circle_marker_f587bfb4a57c5fa9ce17e4b87c94918b.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_89fc20452a44673723a23af7827163c9 = L.circleMarker(
+                [40.9746963077871, 28.986843026000926],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_aa0001a1cf3874ae0263cc40ac4189de = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_4d229636b4cb2714b54626ad56fb0e4d = $(`<div id="html_4d229636b4cb2714b54626ad56fb0e4d" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.9746963077871, 28.986843026000926                 </p>             </div>             </div>`)[0];
+                popup_aa0001a1cf3874ae0263cc40ac4189de.setContent(html_4d229636b4cb2714b54626ad56fb0e4d);
+            
+        
+
+        circle_marker_89fc20452a44673723a23af7827163c9.bindPopup(popup_aa0001a1cf3874ae0263cc40ac4189de)
+        ;
+
+        
+    
+    
+            circle_marker_89fc20452a44673723a23af7827163c9.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_968b815f6e361aa0ede52cb3fd383661 = L.circleMarker(
+                [40.98158569684216, 29.00885041462423],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_92dbf66b70df6d18fe0c35cda8e912fd = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_aa14e284cceece239329552d3bebb1b2 = $(`<div id="html_aa14e284cceece239329552d3bebb1b2" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.98158569684216, 29.00885041462423                 </p>             </div>             </div>`)[0];
+                popup_92dbf66b70df6d18fe0c35cda8e912fd.setContent(html_aa14e284cceece239329552d3bebb1b2);
+            
+        
+
+        circle_marker_968b815f6e361aa0ede52cb3fd383661.bindPopup(popup_92dbf66b70df6d18fe0c35cda8e912fd)
+        ;
+
+        
+    
+    
+            circle_marker_968b815f6e361aa0ede52cb3fd383661.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_08a7c07f76ccde10594e3f2b393d7386 = L.circleMarker(
+                [40.98846108740406, 28.983206227190152],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_06ecf5b2f56c00a03bbcf0c1f766b499 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_aeb795396ea16ebe3dab9a6bb023d817 = $(`<div id="html_aeb795396ea16ebe3dab9a6bb023d817" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.98846108740406, 28.983206227190152                 </p>             </div>             </div>`)[0];
+                popup_06ecf5b2f56c00a03bbcf0c1f766b499.setContent(html_aeb795396ea16ebe3dab9a6bb023d817);
+            
+        
+
+        circle_marker_08a7c07f76ccde10594e3f2b393d7386.bindPopup(popup_06ecf5b2f56c00a03bbcf0c1f766b499)
+        ;
+
+        
+    
+    
+            circle_marker_08a7c07f76ccde10594e3f2b393d7386.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_996dd64518f3be8482d149bf39cca831 = L.circleMarker(
+                [40.988468446850824, 29.00703431182209],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_4553eb58c33086428f7e5ce81d6b0e96 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_221f41c3a01c2264faf147e279a5d611 = $(`<div id="html_221f41c3a01c2264faf147e279a5d611" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.988468446850824, 29.00703431182209                 </p>             </div>             </div>`)[0];
+                popup_4553eb58c33086428f7e5ce81d6b0e96.setContent(html_221f41c3a01c2264faf147e279a5d611);
+            
+        
+
+        circle_marker_996dd64518f3be8482d149bf39cca831.bindPopup(popup_4553eb58c33086428f7e5ce81d6b0e96)
+        ;
+
+        
+    
+    
+            circle_marker_996dd64518f3be8482d149bf39cca831.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_7719c06a164713972df5668103098b92 = L.circleMarker(
+                [41.0022287410622, 28.98682464187343],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_8dd2a5eaa43f2ae62c08e46fc8ed30c4 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_dd01d1c30b144976332851b71798e3ec = $(`<div id="html_dd01d1c30b144976332851b71798e3ec" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 41.0022287410622, 28.98682464187343                 </p>             </div>             </div>`)[0];
+                popup_8dd2a5eaa43f2ae62c08e46fc8ed30c4.setContent(html_dd01d1c30b144976332851b71798e3ec);
+            
+        
+
+        circle_marker_7719c06a164713972df5668103098b92.bindPopup(popup_8dd2a5eaa43f2ae62c08e46fc8ed30c4)
+        ;
+
+        
+    
+    
+            circle_marker_7719c06a164713972df5668103098b92.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_23efc911257c82b06340bd46cf8166db = L.circleMarker(
+                [40.995351915370144, 29.00884581859138],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_0e60e8089eb176140498346ec664da21 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_b10cd48fda6ae8d23548f606dd6bd88f = $(`<div id="html_b10cd48fda6ae8d23548f606dd6bd88f" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 40.995351915370144, 29.00884581859138                 </p>             </div>             </div>`)[0];
+                popup_0e60e8089eb176140498346ec664da21.setContent(html_b10cd48fda6ae8d23548f606dd6bd88f);
+            
+        
+
+        circle_marker_23efc911257c82b06340bd46cf8166db.bindPopup(popup_0e60e8089eb176140498346ec664da21)
+        ;
+
+        
+    
+    
+            circle_marker_23efc911257c82b06340bd46cf8166db.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_7bc20cb679f18bbb66fa0d4c8ea318cf = L.circleMarker(
+                [41.01390264721265, 28.997151388594723],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_9f65a60d7a659fe01e955608aa6e37d1 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_e5b88d19e88dd9dab399fcd47e4da72a = $(`<div id="html_e5b88d19e88dd9dab399fcd47e4da72a" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 41.01390264721265, 28.997151388594723                 </p>             </div>             </div>`)[0];
+                popup_9f65a60d7a659fe01e955608aa6e37d1.setContent(html_e5b88d19e88dd9dab399fcd47e4da72a);
+            
+        
+
+        circle_marker_7bc20cb679f18bbb66fa0d4c8ea318cf.bindPopup(popup_9f65a60d7a659fe01e955608aa6e37d1)
+        ;
+
+        
+    
+    
+            circle_marker_7bc20cb679f18bbb66fa0d4c8ea318cf.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_46ed024ae500cad1c38a5e2ae9a7e19d = L.circleMarker(
+                [41.00118800120454, 29.01401014626787],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_4a04f32f094a0982354889c45c01fe38 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_63d106713e814184e2d1f5a60d0ba744 = $(`<div id="html_63d106713e814184e2d1f5a60d0ba744" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 41.00118800120454, 29.01401014626787                 </p>             </div>             </div>`)[0];
+                popup_4a04f32f094a0982354889c45c01fe38.setContent(html_63d106713e814184e2d1f5a60d0ba744);
+            
+        
+
+        circle_marker_46ed024ae500cad1c38a5e2ae9a7e19d.bindPopup(popup_4a04f32f094a0982354889c45c01fe38)
+        ;
+
+        
+    
+    
+            circle_marker_46ed024ae500cad1c38a5e2ae9a7e19d.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_e7ada08e19d66b5285489660cf3b033b = L.circleMarker(
+                [41.02170405492785, 29.012615971922784],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_0f805d72dbb42089276189cd56027460 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_5a465753ac2be84c51766cb76a3d990e = $(`<div id="html_5a465753ac2be84c51766cb76a3d990e" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 41.02170405492785, 29.012615971922784                 </p>             </div>             </div>`)[0];
+                popup_0f805d72dbb42089276189cd56027460.setContent(html_5a465753ac2be84c51766cb76a3d990e);
+            
+        
+
+        circle_marker_e7ada08e19d66b5285489660cf3b033b.bindPopup(popup_0f805d72dbb42089276189cd56027460)
+        ;
+
+        
+    
+    
+            circle_marker_e7ada08e19d66b5285489660cf3b033b.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_00dddb0b563a153d0c81c37b72bbdf7c = L.circleMarker(
+                [41.005087837111134, 29.021741486384705],
+                {"bubblingMouseEvents": true, "color": "#6c757d", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#6c757d", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_fe2c3eff620147f76d2b9c517a7769f7);
+        
+    
+        var popup_483e4dbc94de161703ec24d928393c08 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_4f3de3c74e94a4b1d03c82d1d0967ec2 = $(`<div id="html_4f3de3c74e94a4b1d03c82d1d0967ec2" style="width: 100.0%; height: 100.0%;">             <div style='font-family: Arial, sans-serif; font-size: 14px; min-width: 200px; padding: 10px;'>                 <h4 style='margin: 0 0 10px 0; color: #6c757d; font-size: 16px;'>                     Görünmüyor. Sıra                 </h4>                 <p style='margin: 5px 0;'>                     <br>                                      </p>                 <p style='margin: 5px 0; font-size: 12px; color: #666;'>                     Koordinatlar: 41.005087837111134, 29.021741486384705                 </p>             </div>             </div>`)[0];
+                popup_483e4dbc94de161703ec24d928393c08.setContent(html_4f3de3c74e94a4b1d03c82d1d0967ec2);
+            
+        
+
+        circle_marker_00dddb0b563a153d0c81c37b72bbdf7c.bindPopup(popup_483e4dbc94de161703ec24d928393c08)
+        ;
+
+        
+    
+    
+            circle_marker_00dddb0b563a153d0c81c37b72bbdf7c.bindTooltip(
+                `<div>
+                     <b>Görünmüyor</b>
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
+</html>
